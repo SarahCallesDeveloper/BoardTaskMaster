@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../Styling/CssCard.css';
 
 export function Card({ card, onEdit }) {
   const { id, title, description, dueDate, Tags, assignedMembers } = card;
@@ -42,16 +43,44 @@ export function Card({ card, onEdit }) {
   };
 
   return (
-    <div className="card" style={{ border: '1px solid black', margin: '10px 0' }}>
+    <div>
+    <div className="container">
+   <div className="row">
+  <div className="col">
+    <div className="card">
       <div className="card-body">
-        <h4 className="card-title">{title}</h4>
-        <p className="card-text">{description}</p>
-        <p className="card-text">Due Date: {dueDate}</p>
-        <p className="card-text">Assigned Members: {assignedMembers.map(member => member.name).join(', ')}</p>
-        <p className="card-text">Tags: {Tags.join(', ')}</p>
+        <h4>{title}</h4>
+        <p className='date'>{dueDate}</p>
+        <p className='description'>{description}</p>
+       
+        <p>
+          {assignedMembers.map((member, index) => (
+            <span
+              key={index}
+              className={`member member${index % 2 + 1}`}
+              style={{ padding: '5px' }} // Add padding for members
+            >
+              {member.name}
+            </span>
+          ))}
+        </p>
+        <p>
+          {Tags.map((tag, index) => (
+            <span
+              key={index}
+              className={`tag tag${index % 2 + 1}`}
+              style={{ padding: '5px' }} // Add padding for tags
+            >
+              {tag}
+            </span>
+          ))}
+        </p>
         <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
       </div>
-
+    </div>
+  </div>
+</div>
+</div>
       {isEditing && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document" style={{ maxWidth: '600px' }}>
