@@ -33,35 +33,50 @@ export function Card({ card, onEdit }) {
     <div style={{ border: '1px solid black', padding: '10px', margin: '10px 0' }}>
       {isEditing ? (
         <>
-          <input value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
-          <textarea value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
-          <input type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
-          {editedTags.map((tag, index) => (
-            <div key={index}>
-              <input 
-                value={tag} 
-                onChange={(e) => {
-                  const newTags = [...editedTags];
-                  newTags[index] = e.target.value;
-                  setEditedTags(newTags);
-                }} 
-              />
-            </div>
-          ))}
-          <button onClick={handleAddTag}>Add Tag</button>
-          {editedAssignedMembers.map((member, index) => (
-            <div key={index}>
-              <input 
-                value={member.name} 
-                onChange={(e) => {
-                  const newMembers = [...editedAssignedMembers];
-                  newMembers[index] = { name: e.target.value };
-                  setEditedAssignedMembers(newMembers);
-                }} 
-              />
-            </div>
-          ))}
-          <button onClick={handleAddMember}>Add Member</button>
+          <div>
+            <strong>Title:</strong>
+            <input value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
+          </div>
+          <div>
+            <strong>Description:</strong>
+            <textarea value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
+          </div>
+          <div>
+            <strong>Due Date:</strong>
+            <input type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
+          </div>
+          <div>
+            <strong>Tags:</strong>
+            {editedTags.map((tag, index) => (
+              <div key={index}>
+                <input 
+                  value={tag} 
+                  onChange={(e) => {
+                    const newTags = [...editedTags];
+                    newTags[index] = e.target.value;
+                    setEditedTags(newTags);
+                  }} 
+                />
+              </div>
+            ))}
+            <button onClick={handleAddTag}>Add Tag</button>
+          </div>
+          <div>
+            <strong>Assigned Members:</strong>
+            {editedAssignedMembers.map((member, index) => (
+              <div key={index}>
+                <input 
+                  value={member.name} 
+                  onChange={(e) => {
+                    const newMembers = [...editedAssignedMembers];
+                    newMembers[index] = { name: e.target.value };
+                    setEditedAssignedMembers(newMembers);
+                  }} 
+                />
+              </div>
+            ))}
+            <button onClick={handleAddMember}>Add Member</button>
+          </div>
           <button onClick={handleSave}>Save</button>
         </>
       ) : (
