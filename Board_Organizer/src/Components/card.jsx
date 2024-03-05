@@ -54,7 +54,7 @@ export function Card({ card, onEdit }) {
 
       {isEditing && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-          <div className="modal-dialog" role="document">
+          <div className="modal-dialog" role="document" style={{ maxWidth: '600px' }}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Edit Card</h5>
@@ -65,11 +65,15 @@ export function Card({ card, onEdit }) {
               <div className="modal-body">
                 <div className="form-group">
                   <strong>Title:</strong>
-                  <input className="form-control" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
+                  <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
+                    <input className="form-control" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
+                  </div>
                 </div>
                 <div className="form-group">
                   <strong>Description:</strong>
-                  <textarea className="form-control" value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
+                  <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
+                    <textarea className="form-control" value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
+                  </div>
                 </div>
                 <div className="form-group">
                   <strong>Due Date:</strong>
@@ -77,42 +81,46 @@ export function Card({ card, onEdit }) {
                 </div>
                 <div className="form-group">
                   <strong>Tags:</strong>
-                  {editedTags.map((tag, index) => (
-                    <div key={index} className="input-group mb-3">
-                      <input 
-                        className="form-control" 
-                        value={tag} 
-                        onChange={(e) => {
-                          const newTags = [...editedTags];
-                          newTags[index] = e.target.value;
-                          setEditedTags(newTags);
-                        }} 
-                      />
-                      <div className="input-group-append">
-                        <button className="btn btn-danger" type="button" onClick={() => handleRemoveTag(index)}>X</button>
+                  <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
+                    {editedTags.map((tag, index) => (
+                      <div key={index} className="input-group mb-3">
+                        <input 
+                          className="form-control" 
+                          value={tag} 
+                          onChange={(e) => {
+                            const newTags = [...editedTags];
+                            newTags[index] = e.target.value;
+                            setEditedTags(newTags);
+                          }} 
+                        />
+                        <div className="input-group-append">
+                          <button className="btn btn-danger" type="button" onClick={() => handleRemoveTag(index)}>X</button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                   <button className="btn btn-success" onClick={handleAddTag}>Add Tag</button>
                 </div>
                 <div className="form-group">
                   <strong>Assigned Members:</strong>
-                  {editedAssignedMembers.map((member, index) => (
-                    <div key={index} className="input-group mb-3">
-                      <input 
-                        className="form-control" 
-                        value={member.name} 
-                        onChange={(e) => {
-                          const newMembers = [...editedAssignedMembers];
-                          newMembers[index] = { name: e.target.value };
-                          setEditedAssignedMembers(newMembers);
-                        }} 
-                      />
-                      <div className="input-group-append">
-                        <button className="btn btn-danger" type="button" onClick={() => handleRemoveMember(index)}>X</button>
+                  <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
+                    {editedAssignedMembers.map((member, index) => (
+                      <div key={index} className="input-group mb-3">
+                        <input 
+                          className="form-control" 
+                          value={member.name} 
+                          onChange={(e) => {
+                            const newMembers = [...editedAssignedMembers];
+                            newMembers[index] = { name: e.target.value };
+                            setEditedAssignedMembers(newMembers);
+                          }} 
+                        />
+                        <div className="input-group-append">
+                          <button className="btn btn-danger" type="button" onClick={() => handleRemoveMember(index)}>X</button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                   <button className="btn btn-success" onClick={handleAddMember}>Add Member</button>
                 </div>
               </div>
