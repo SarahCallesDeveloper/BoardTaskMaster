@@ -42,66 +42,87 @@ export function Card({ card, onEdit }) {
   };
 
   return (
-    <div style={{ border: '1px solid black', padding: '10px', margin: '10px 0' }}>
-      {isEditing ? (
-        <>
-          <div>
-            <strong>Title:</strong>
-            <input value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
-          </div>
-          <div>
-            <strong>Description:</strong>
-            <textarea value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
-          </div>
-          <div>
-            <strong>Due Date:</strong>
-            <input type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
-          </div>
-          <div>
-            <strong>Tags:</strong>
-            {editedTags.map((tag, index) => (
-              <div key={index}>
-                <input 
-                  value={tag} 
-                  onChange={(e) => {
-                    const newTags = [...editedTags];
-                    newTags[index] = e.target.value;
-                    setEditedTags(newTags);
-                  }} 
-                />
-                <button onClick={() => handleRemoveTag(index)}>X</button>
+    <div className="card" style={{ border: '1px solid black', margin: '10px 0' }}>
+      <div className="card-body">
+        <h4 className="card-title">{title}</h4>
+        <p className="card-text">{description}</p>
+        <p className="card-text">Due Date: {dueDate}</p>
+        <p className="card-text">Assigned Members: {assignedMembers.map(member => member.name).join(', ')}</p>
+        <p className="card-text">Tags: {Tags.join(', ')}</p>
+        <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
+      </div>
+
+      {isEditing && (
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Edit Card</h5>
+                <button type="button" className="close" onClick={() => setIsEditing(false)}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-            ))}
-            <button onClick={handleAddTag}>Add Tag</button>
-          </div>
-          <div>
-            <strong>Assigned Members:</strong>
-            {editedAssignedMembers.map((member, index) => (
-              <div key={index}>
-                <input 
-                  value={member.name} 
-                  onChange={(e) => {
-                    const newMembers = [...editedAssignedMembers];
-                    newMembers[index] = { name: e.target.value };
-                    setEditedAssignedMembers(newMembers);
-                  }} 
-                />
-                <button onClick={() => handleRemoveMember(index)}>X</button>
+              <div className="modal-body">
+                <div className="form-group">
+                  <strong>Title:</strong>
+                  <input className="form-control" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
+                </div>
+                <div className="form-group">
+                  <strong>Description:</strong>
+                  <textarea className="form-control" value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
+                </div>
+                <div className="form-group">
+                  <strong>Due Date:</strong>
+                  <input className="form-control" type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
+                </div>
+                <div className="form-group">
+                  <strong>Tags:</strong>
+                  {editedTags.map((tag, index) => (
+                    <div key={index} className="input-group mb-3">
+                      <input 
+                        className="form-control" 
+                        value={tag} 
+                        onChange={(e) => {
+                          const newTags = [...editedTags];
+                          newTags[index] = e.target.value;
+                          setEditedTags(newTags);
+                        }} 
+                      />
+                      <div className="input-group-append">
+                        <button className="btn btn-danger" type="button" onClick={() => handleRemoveTag(index)}>X</button>
+                      </div>
+                    </div>
+                  ))}
+                  <button className="btn btn-success" onClick={handleAddTag}>Add Tag</button>
+                </div>
+                <div className="form-group">
+                  <strong>Assigned Members:</strong>
+                  {editedAssignedMembers.map((member, index) => (
+                    <div key={index} className="input-group mb-3">
+                      <input 
+                        className="form-control" 
+                        value={member.name} 
+                        onChange={(e) => {
+                          const newMembers = [...editedAssignedMembers];
+                          newMembers[index] = { name: e.target.value };
+                          setEditedAssignedMembers(newMembers);
+                        }} 
+                      />
+                      <div className="input-group-append">
+                        <button className="btn btn-danger" type="button" onClick={() => handleRemoveMember(index)}>X</button>
+                      </div>
+                    </div>
+                  ))}
+                  <button className="btn btn-success" onClick={handleAddMember}>Add Member</button>
+                </div>
               </div>
-            ))}
-            <button onClick={handleAddMember}>Add Member</button>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={handleSave}>Save changes</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>Close</button>
+              </div>
+            </div>
           </div>
-          <button onClick={handleSave}>Save</button>
-        </>
-      ) : (
-        <>
-          <h4>{title}</h4>
-          <p>{description}</p>
-          <p>Due Date: {dueDate}</p>
-          <p>Tags: {Tags.join(', ')}</p>
-          <p>Assigned Members: {assignedMembers.map(member => member.name).join(', ')}</p>
-          <button onClick={handleEdit}>Edit</button>
-        </>
+        </div>
       )}
     </div>
   );
