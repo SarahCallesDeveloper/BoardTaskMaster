@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Card } from './Components/card'; // Adjust the import path accordingly
+//import { Card } from './Components/card'; // Adjust the import path accordingly
 import json from './jsonTest.json'; // Assuming you have a JSON file with card data
+import {Card} from "./Components/AlternativeCard"
 
 function App() {
   const [cards, setCards] = useState([json]);

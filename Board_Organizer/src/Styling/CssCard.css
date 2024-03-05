@@ -7,8 +7,8 @@
   }
   
   .date {
-    color: rgba(0, 0, 0, 0.1); /* Opaque color for date */
-    padding: 5px 10px;
+    color: rgba(0, 0, 0, 0.438); /* Opaque color for date */
+    padding: none;
     border-radius: 5px;
     margin-bottom: 10px;
   }
@@ -30,4 +30,9 @@
     padding: 5px 10px;
     margin-right: 5px;
     margin-bottom: 5px;
+  }
+  .small-input {
+    width: 100px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    /* You can also adjust other properties like padding, font-size, etc., to fine-tune the appearance */
   }
