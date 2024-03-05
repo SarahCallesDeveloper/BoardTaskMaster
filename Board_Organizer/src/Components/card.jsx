@@ -29,6 +29,18 @@ export function Card({ card, onEdit }) {
     setEditedAssignedMembers([...editedAssignedMembers, { name: '' }]);
   };
 
+  const handleRemoveTag = (index) => {
+    const newTags = [...editedTags];
+    newTags.splice(index, 1);
+    setEditedTags(newTags);
+  };
+
+  const handleRemoveMember = (index) => {
+    const newMembers = [...editedAssignedMembers];
+    newMembers.splice(index, 1);
+    setEditedAssignedMembers(newMembers);
+  };
+
   return (
     <div style={{ border: '1px solid black', padding: '10px', margin: '10px 0' }}>
       {isEditing ? (
@@ -57,6 +69,7 @@ export function Card({ card, onEdit }) {
                     setEditedTags(newTags);
                   }} 
                 />
+                <button onClick={() => handleRemoveTag(index)}>X</button>
               </div>
             ))}
             <button onClick={handleAddTag}>Add Tag</button>
@@ -73,6 +86,7 @@ export function Card({ card, onEdit }) {
                     setEditedAssignedMembers(newMembers);
                   }} 
                 />
+                <button onClick={() => handleRemoveMember(index)}>X</button>
               </div>
             ))}
             <button onClick={handleAddMember}>Add Member</button>
