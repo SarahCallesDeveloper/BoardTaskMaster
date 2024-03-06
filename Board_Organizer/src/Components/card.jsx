@@ -79,7 +79,7 @@ export function Card({ card, onEdit }) {
                     </span>
                   ))}
                 </p>
-                <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
+                <button className="btn btn-primary btn-sm" onClick={handleEdit}>Edit</button>
               </div>
             </div>
           </div>
@@ -89,33 +89,33 @@ export function Card({ card, onEdit }) {
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document" style={{ maxWidth: '600px', maxHeight: "400px" }}>
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Edit Card</h5>
-                <button type="button" className="close" onClick={() => setIsEditing(false)}>
+              <div className="modal-header row">
+                <h5 className="modal-title col-11">Edit Card</h5>
+                <button type="button" className="close col-auto" onClick={() => setIsEditing(false)}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div className="modal-body">
-                <div className="form-group">
+                <div className="form-group" >
                   <strong>Title:</strong>
                   <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
                     <input className="form-control" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
                   </div>
                 </div>
-                <div className="form-group">
+                <div className="form-group"  style={{ paddingTop: '10px',paddingBottom: '10px' }}>
                   <strong>Description:</strong>
                   <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
                     <textarea className="form-control" value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <strong>Due Date:</strong>
+                  <strong >Due Date:</strong>
                   <input className="form-control" type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
                 </div>
                 <div className="form-group">
-  <div className='row' style={{ padding: '10px' }}>
-    <strong className='col-10'>Tags:</strong>  
-    <button className="btn btn-sm btn-success col-1" onClick={handleAddTag} style={{ fontSize: "0.7rem", padding: "0.1rem 0.3rem" }}>Add</button>
+  <div className='row' style={{ paddingTop: '10px',paddingBottom: '10px' }}>
+    <strong className='col-11'>Tags:</strong>  
+    <button className="btn btn-sm btn-success col-auto" onClick={handleAddTag} style={{ fontSize: "0.7rem", padding: "0.1rem 0.3rem" }}>Add</button>
   </div>
   <p>
     <div style={{ maxHeight: '60px', overflowY: 'auto' }} className="container">
@@ -155,17 +155,17 @@ export function Card({ card, onEdit }) {
                           }}
                         />
                         <div className="input-group-append">
-                          <button className="btn btn-danger" type="button" onClick={() => handleRemoveMember(index)}>X</button>
+                          <button className="btn btn-danger btn-sm" type="button" onClick={() => handleRemoveMember(index)}>X</button>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <button className="btn btn-success" onClick={handleAddMember}>Add Member</button>
+                  <button className="btn btn-success btn-sm" onClick={handleAddMember}>Add Member</button>
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary" onClick={handleSave}>Save changes</button>
-                <button type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>Close</button>
+                <button type="button" className="btn btn-primary btn-sm" onClick={handleSave}>Save changes</button>
+                <button type="button" className="btn btn-secondary btn-sm" onClick={() => setIsEditing(false)}>Close</button>
               </div>
             </div>
           </div>
@@ -193,8 +193,8 @@ export function Card({ card, onEdit }) {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary" onClick={handleTagSave}>Save Tag</button>
-                <button type="button" className="btn btn-secondary" onClick={() => setIsEditingTags(false)}>Cancel</button>
+                <button type="button" className="btn btn-primary btn-sm" onClick={handleTagSave}>Save Tag</button>
+                <button type="button" className="btn btn-secondary btn-sm" onClick={() => setIsEditingTags(false)}>Cancel</button>
               </div>
             </div>
           </div>
