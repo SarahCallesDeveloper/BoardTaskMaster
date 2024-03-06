@@ -12,6 +12,14 @@ export function Card({ card, onEdit }) {
   const [newTag, setNewTag] = useState('');
   const [isEditingTags, setIsEditingTags] = useState(false);
 
+
+  const [collapsed, setCollapsed] = useState(true);
+  
+  const handleToggleCollapse = () => {
+      setCollapsed(!collapsed);
+    };
+  
+  
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -48,45 +56,51 @@ export function Card({ card, onEdit }) {
   };
 
   return (
-    <div>
-    <div>
-  <div className="container">
+    <div className="container">
     <div className="row">
       <div className="col">
-        <div className="card" style={{ maxWidth: '320px' }}>
-          <div className="card-body" style={{padding:10}}>
-            <h4>{title}</h4>
-            <p  className='date'>{dueDate}</p>
-            <p className='description'>{description}</p>
-            <p>
-              {assignedMembers.map((member, index) => (
-                <span
-                  key={index}
-                  className={`member member${index % 2 + 1}`}
-                  style={{ padding: '5px' }}
-                >
-                  {member.name}
-                </span>
-              ))}
-            </p>
-            <p>
-              {Tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className={`tag tag${index % 2 + 1}`}
-                  style={{ padding: '5px' }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </p>
-            <button className="btn btn-primary btn-sm" onClick={handleEdit}>Edit</button>
+        <div className="card" style={{ maxWidth: '320px', position: 'relative' }}>
+          {/* Overlay element */}
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to bottom, rgba(255, 182, 193, 0.4), rgba(173, 216, 230, 0.4))', pointerEvents: 'none' }}></div>
+
+          <div className="card-body" style={{ padding: 10 }}>
+            <div className="d-flex justify-content-between align-items-center">
+              <h5 className="card-title mb-0">{title}</h5>
+              <button className="btn text-primary" type="button" onClick={handleToggleCollapse}>
+                ?<i className={`bi bi-${collapsed ? 'plus' : 'dash'}-circle`}></i>
+              </button>
+            </div>
+            <p className='date'>{dueDate}</p>
+            <div className={`collapse ${collapsed ? '' : 'show'}`}>
+              <p className='description'>{description}</p>
+              <p>
+                {assignedMembers.map((member, index) => (
+                  <span
+                    key={index}
+                    className={`member member${index % 2 + 1}`}
+                    style={{ padding: '5px' }}
+                  >
+                    {member.name}
+                  </span>
+                ))}
+              </p>
+              <p>
+                {Tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className={`tag tag${index % 2 + 1}`}
+                    style={{ padding: '5px' }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </p>
+              <button className="btn btn-primary btn-sm" onClick={handleEdit}>Edit</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
       {isEditing && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document" style={{ maxWidth: '600px', maxHeight: "400px" }}>
