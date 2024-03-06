@@ -49,42 +49,44 @@ export function Card({ card, onEdit }) {
 
   return (
     <div>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card">
-              <div className="card-body">
-                <h4>{title}</h4>
-                <p className='date'>{dueDate}</p>
-                <p className='description'>{description}</p>
-                <p>
-                  {assignedMembers.map((member, index) => (
-                    <span
-                      key={index}
-                      className={`member member${index % 2 + 1}`}
-                      style={{ padding: '5px' }}
-                    >
-                      {member.name}
-                    </span>
-                  ))}
-                </p>
-                <p>
-                  {Tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className={`tag tag${index % 2 + 1}`}
-                      style={{ padding: '5px' }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </p>
-                <button className="btn btn-primary btn-sm" onClick={handleEdit}>Edit</button>
-              </div>
-            </div>
+    <div>
+  <div className="container">
+    <div className="row">
+      <div className="col">
+        <div className="card" style={{ maxWidth: '320px' }}>
+          <div className="card-body" style={{padding:10}}>
+            <h4>{title}</h4>
+            <p  className='date'>{dueDate}</p>
+            <p className='description'>{description}</p>
+            <p>
+              {assignedMembers.map((member, index) => (
+                <span
+                  key={index}
+                  className={`member member${index % 2 + 1}`}
+                  style={{ padding: '5px' }}
+                >
+                  {member.name}
+                </span>
+              ))}
+            </p>
+            <p>
+              {Tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className={`tag tag${index % 2 + 1}`}
+                  style={{ padding: '5px' }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </p>
+            <button className="btn btn-primary btn-sm" onClick={handleEdit}>Edit</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
       {isEditing && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document" style={{ maxWidth: '600px', maxHeight: "400px" }}>
@@ -96,11 +98,17 @@ export function Card({ card, onEdit }) {
                 </button>
               </div>
               <div className="modal-body">
-                <div className="form-group" >
+                <div className='row'>
+                <div className="form-group col-9" >
                   <strong>Title:</strong>
                   <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
                     <input className="form-control" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
                   </div>
+                </div>
+                <div className="form-group col-3">
+                  <strong >Due Date:</strong>
+                  <input className="form-control" type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
+                </div>
                 </div>
                 <div className="form-group"  style={{ paddingTop: '10px',paddingBottom: '10px' }}>
                   <strong>Description:</strong>
@@ -108,10 +116,7 @@ export function Card({ card, onEdit }) {
                     <textarea className="form-control" value={editedDescription} onChange={(e) => setEditedDescription(e.target.value)} />
                   </div>
                 </div>
-                <div className="form-group">
-                  <strong >Due Date:</strong>
-                  <input className="form-control" type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
-                </div>
+              
                 <div className="form-group">
   <div className='row' style={{ paddingTop: '10px',paddingBottom: '10px' }}>
     <strong className='col-11'>Tags:</strong>  
