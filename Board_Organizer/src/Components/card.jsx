@@ -9,21 +9,20 @@ export function Card({ card, onEdit }) {
   const [editedDueDate, setEditedDueDate] = useState(dueDate);
   const [editedTags, setEditedTags] = useState([...Tags]);
   const [editedAssignedMembers, setEditedAssignedMembers] = useState([...assignedMembers]);
+  const [newTag, setNewTag] = useState('');
+  const [isEditingTags, setIsEditingTags] = useState(false);
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
   const handleSave = () => {
-    // Call the onEdit function to update the card data
     onEdit(id, editedTitle, editedDescription, editedDueDate, editedTags, editedAssignedMembers);
-  
-    // After saving, exit edit mode
     setIsEditing(false);
   };
 
   const handleAddTag = () => {
-    setEditedTags([...editedTags, '']);
+    setIsEditingTags(true);
   };
 
   const handleAddMember = () => {
@@ -42,48 +41,53 @@ export function Card({ card, onEdit }) {
     setEditedAssignedMembers(newMembers);
   };
 
+  const handleTagSave = () => {
+    setEditedTags([...editedTags, newTag]);
+    setNewTag('');
+    setIsEditingTags(false);
+  };
+
   return (
     <div>
-    <div className="container">
-   <div className="row">
-  <div className="col">
-    <div className="card">
-      <div className="card-body">
-        <h4>{title}</h4>
-        <p className='date'>{dueDate}</p>
-        <p className='description'>{description}</p>
-       
-        <p>
-          {assignedMembers.map((member, index) => (
-            <span
-              key={index}
-              className={`member member${index % 2 + 1}`}
-              style={{ padding: '5px' }} // Add padding for members
-            >
-              {member.name}
-            </span>
-          ))}
-        </p>
-        <p>
-          {Tags.map((tag, index) => (
-            <span
-              key={index}
-              className={`tag tag${index % 2 + 1}`}
-              style={{ padding: '5px' }} // Add padding for tags
-            >
-              {tag}
-            </span>
-          ))}
-        </p>
-        <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="card">
+              <div className="card-body">
+                <h4>{title}</h4>
+                <p className='date'>{dueDate}</p>
+                <p className='description'>{description}</p>
+                <p>
+                  {assignedMembers.map((member, index) => (
+                    <span
+                      key={index}
+                      className={`member member${index % 2 + 1}`}
+                      style={{ padding: '5px' }}
+                    >
+                      {member.name}
+                    </span>
+                  ))}
+                </p>
+                <p>
+                  {Tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className={`tag tag${index % 2 + 1}`}
+                      style={{ padding: '5px' }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </p>
+                <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-</div>
       {isEditing && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block'  }}>
-          <div className="modal-dialog" role="document" style={{ maxWidth: '600px',maxHeight:"400px"}}>
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+          <div className="modal-dialog" role="document" style={{ maxWidth: '600px', maxHeight: "400px" }}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Edit Card</h5>
@@ -109,40 +113,46 @@ export function Card({ card, onEdit }) {
                   <input className="form-control" type="date" value={editedDueDate} onChange={(e) => setEditedDueDate(e.target.value)} />
                 </div>
                 <div className="form-group">
-                  <strong>Tags:</strong>
-                  <p cla style={{ maxHeight: '100px', overflowY: 'auto' }}>
-                    {editedTags.map((tag, index) => (
-                      <span key={index} className="input-group mb-3 ">
-                        <input 
-                          className="form-control " 
-                          value={tag} 
-                          onChange={(e) => {
-                            const newTags = [...editedTags];
-                            newTags[index] = e.target.value;
-                            setEditedTags(newTags);
-                          }} 
-                        />
-                        <div className="input-group-append">
-                          <button className="btn btn-danger" type="button" onClick={() => handleRemoveTag(index)}>X</button>
-                        </div>
-                      </span>
-                    ))}
-                  </p>
-                  <button className="btn btn-success" onClick={handleAddTag}>Add Tag</button>
-                </div>
+  <div className='row' style={{ padding: '10px' }}>
+    <strong className='col-10'>Tags:</strong>  
+    <button className="btn btn-sm btn-success col-1" onClick={handleAddTag} style={{ fontSize: "0.7rem", padding: "0.1rem 0.3rem" }}>Add</button>
+  </div>
+  <p>
+    <div style={{ maxHeight: '60px', overflowY: 'auto' }} className="container">
+      <div className="row">
+        {editedTags.map((tag, index) => (
+          <div key={index} className="col-auto">
+            <div className="input-group mb-3">
+              <span
+                key={index}
+                className={`tag tag${index % 2 + 1}`}
+              >
+                {tag}
+              </span>
+              <div className="input-group-append">
+                <button className="btn btn-sm" type="button" style={{ fontSize: "0.7rem", padding: "0.1rem 0.3rem", backgroundColor: 'rgba(173, 216, 230, 0.7)', color: 'black' }} onClick={() => handleRemoveTag(index)}>x</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </p>
+</div>
+
                 <div className="form-group">
                   <strong>Assigned Members:</strong>
                   <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
                     {editedAssignedMembers.map((member, index) => (
                       <div key={index} className="input-group mb-3">
-                        <input 
-                          className="form-control" 
-                          value={member.name} 
+                        <input
+                          className="form-control"
+                          value={member.name}
                           onChange={(e) => {
                             const newMembers = [...editedAssignedMembers];
                             newMembers[index] = { name: e.target.value };
                             setEditedAssignedMembers(newMembers);
-                          }} 
+                          }}
                         />
                         <div className="input-group-append">
                           <button className="btn btn-danger" type="button" onClick={() => handleRemoveMember(index)}>X</button>
@@ -156,6 +166,35 @@ export function Card({ card, onEdit }) {
               <div className="modal-footer">
                 <button type="button" className="btn btn-primary" onClick={handleSave}>Save changes</button>
                 <button type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {isEditingTags && (
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Edit Tags</h5>
+                <button type="button" className="close" onClick={() => setIsEditingTags(false)}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="form-group">
+                  <strong>Add New Tag:</strong>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={newTag}
+                    onChange={(e) => setNewTag(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={handleTagSave}>Save Tag</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setIsEditingTags(false)}>Cancel</button>
               </div>
             </div>
           </div>
