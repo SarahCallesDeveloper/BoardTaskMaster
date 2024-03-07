@@ -61,7 +61,7 @@ export function Card({ card, onEdit }) {
       <div className="col">
         <div className="card" style={{ maxWidth: '320px', position: 'relative' }}>
           {/* Overlay element */}
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to bottom, rgba(255, 182, 193, 0.4), rgba(173, 216, 230, 0.4))', pointerEvents: 'none' }}></div>
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to bottom, rgba(0, 102, 255, 0.2), rgba(0, 255, 128, 0.2))', pointerEvents: 'none' }}></div>
 
           <div className="card-body" style={{ padding: 10 }}>
             <div className="d-flex justify-content-between align-items-center">
@@ -105,7 +105,7 @@ export function Card({ card, onEdit }) {
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document" style={{ maxWidth: '600px', maxHeight: "400px" }}>
             <div className="modal-content">
-              <div className="modal-header row">
+              <div className="modal-header">
                 <h5 className="modal-title col-11">Edit Card</h5>
                 <button type="button" className="close col-auto" onClick={() => setIsEditing(false)}>
                   <span aria-hidden="true">&times;</span>
