@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import { Card } from './Components/card'; // Adjust the import path accordingly
-import json from './jsonTest.json'; // Assuming you have a JSON file with card data
-import jsonList from "./listTest.json"
-import {List} from "./Components/list"
-//import {Card} from "./Components/AlternativeCard"
-
-function App() {
-  console.log("jsonList",jsonList)
+import {Card} from './card'; // Assuming you have a Card component
+import json from '../jsonTest.json';
+export function List({ list }){
   const [cards, setCards] = useState([json]);
-
   // Function to handle editing of a card
   const handleEdit = (id, editedTitle, editedDescription, editedDueDate, editedTags, editedAssignedMembers) => {
     // Find the card with the given id
@@ -40,10 +33,3 @@ function App() {
     </div>
   );
 }
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <List list={jsonList}/>
-  </React.StrictMode>,
-);

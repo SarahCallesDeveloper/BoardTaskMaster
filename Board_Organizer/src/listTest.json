@@ -1,0 +1,22 @@
+{
+    "id": "list1",
+          "name": "To Do",
+          "cards": [
+            {
+              "id": "task1",
+              "title": "Create Wireframes",
+              "description": "Design wireframes for the new feature",
+              "dueDate": "2024-03-10",
+              "Tags": ["Design"],
+              "assignedMembers": ["user1", "user2"]
+            },
+            {
+              "id": "task2",
+              "title": "Set Up Server",
+              "description": "Configure the server for the project",
+              "dueDate": "2024-03-15",
+              "Tags": ["Development"],
+              "assignedMembers": ["user3"]
+            }
+          ]
+}
