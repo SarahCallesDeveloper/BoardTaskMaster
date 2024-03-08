@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card } from './card'; // Assuming you have a Card component
 import '../Styling/CssList.css';
+import "../Styling/CssScrollbar.css"
 
 export function List({ list }) {
   const { id, name, cards } = list;
@@ -41,17 +42,17 @@ export function List({ list }) {
     <div className="container px-0 custom-container" style={{ maxWidth: '330px', height: '90vh', overflowY: 'auto', overflowX: 'hidden', background: 'linear-gradient(45deg, #FF6B6B, #FFE66D)', borderRadius: '15px' }}>
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="droppable">
-          {(provided) => (
+          {(provided, snapshot) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <div className="list" id={id}>
                 <h2 className="mt-2 mb-3" style={{ textAlign: 'center', fontSize: '1.2rem', paddingTop: '10px', margin: '0' }}>{name}</h2>
                 <div className="row row-cols-1 row-cols-md-1 g-1">
                   {updatedCards.map((card, index) => (
                     <Draggable key={card.id} draggableId={card.id} index={index}>
-                      {(provided) => (
+                      {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                           <div className="col">
-                            <Card card={card} onEdit={handleEdit} style={{ borderRadius: '15px' }} />
+                            <Card card={card} onEdit={handleEdit} style={{ borderRadius: '15px', boxShadow: snapshot.isDragging ? '0 4px 8px 0 rgba(0, 0, 0, 0.2)' : 'none' }} />
                           </div>
                         </div>
                       )}
@@ -67,3 +68,4 @@ export function List({ list }) {
     </div>
   );
 }
+

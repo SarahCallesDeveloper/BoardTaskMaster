@@ -4,6 +4,8 @@ import { Card } from './Components/card'; // Adjust the import path accordingly
 import json from './jsonTest.json'; // Assuming you have a JSON file with card data
 import jsonList from "./listTest.json"
 import {List} from "./Components/list"
+import {Board} from "./Components/Board"
+import jsonBoard from "./BoardTest.json"
 //import {Card} from "./Components/AlternativeCard"
 
 function App() {
@@ -44,6 +46,7 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    <List list={jsonList}/>
+  <Board boardData={jsonBoard}></Board>
+  {console.log("jsonBoard: ",jsonBoard)}
   </>,
 );

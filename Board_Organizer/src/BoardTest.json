@@ -1,0 +1,178 @@
+{
+    "id": "board1",
+    "name": "Project Board",
+    "lists": [
+        {
+            "id": "list1",
+            "name": "To Do",
+            "cards": [
+              {
+                "id": "task1",
+                "title": "Create Wireframes",
+                "description": "Design wireframes for the new feature",
+                "dueDate": "2024-03-10",
+                "Tags": ["Design"],
+                "assignedMembers": [
+                  {
+                    "id": "user1",
+                    "name": "John Doe"
+                  },
+                  {
+                    "id": "user2",
+                    "name": "Jane Smith"
+                  }
+                ]
+              },
+              {
+                "id": "task2",
+                "title": "Set Up Server",
+                "description": "Configure the server for the project",
+                "dueDate": "2024-03-15",
+                "Tags": ["Development"],
+                "assignedMembers": [
+                  {
+                    "id": "user1",
+                    "name": "Rose Doe"
+                  },
+                  {
+                    "id": "user2",
+                    "name": "claire Smith"
+                  }
+                ]
+              },
+              {
+                "id": "task3",
+                "title": "Set Up Server",
+                "description": "Configure the server for the project",
+                "dueDate": "2024-03-15",
+                "Tags": ["Development"],
+                "assignedMembers": [
+                  {
+                    "id": "user1",
+                    "name": "Rose Doe"
+                  },
+                  {
+                    "id": "user2",
+                    "name": "claire Smith"
+                  }
+                ]
+              },
+              {
+                "id": "task4",
+                "title": "Set Up Server",
+                "description": "Configure the server for the project",
+                "dueDate": "2024-03-15",
+                "Tags": ["Development"],
+                "assignedMembers": [
+                  {
+                    "id": "user1",
+                    "name": "Rose Doe"
+                  },
+                  {
+                    "id": "user2",
+                    "name": "claire Smith"
+                  }
+                ]
+              },
+              {
+                "id": "task5",
+                "title": "Set Up Server",
+                "description": "Configure the server for the project",
+                "dueDate": "2024-03-15",
+                "Tags": ["Development"],
+                "assignedMembers": [
+                  {
+                    "id": "user1",
+                    "name": "Rose Doe"
+                  },
+                  {
+                    "id": "user2",
+                    "name": "claire Smith"
+                  }
+                ]
+              },
+              {
+                "id": "task6",
+                "title": "Set Up Server",
+                "description": "Configure the server for the project",
+                "dueDate": "2024-03-15",
+                "Tags": ["Development"],
+                "assignedMembers": [
+                  {
+                    "id": "user1",
+                    "name": "Rose Doe"
+                  },
+                  {
+                    "id": "user2",
+                    "name": "claire Smith"
+                  }
+                ]
+              },
+              {
+                "id": "task7",
+                "title": "Set Up Server",
+                "description": "Configure the server for the project",
+                "dueDate": "2024-03-15",
+                "Tags": ["Development"],
+                "assignedMembers": [
+                  {
+                    "id": "user1",
+                    "name": "Rose Doe"
+                  },
+                  {
+                    "id": "user2",
+                    "name": "claire Smith"
+                  }
+                ]
+              }
+            ]
+          }
+,          
+{
+    "id": "list2",
+    "name": "In Progress",
+    "cards": [
+      {
+        "id": "task8",
+        "title": "Implement Authentication",
+        "description": "Implement user authentication in the app",
+        "dueDate": "2024-03-20",
+        "Tags": ["Development"],
+        "assignedMembers": [
+          {
+            "id": "user2",
+            "name": "Jane Smith"
+          },
+          {
+            "id": "user4",
+            "name": "Alice Brown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list3",
+    "name": "Done",
+    "cards": [
+      {
+        "id": "task9",
+        "title": "Testing",
+        "description": "Perform testing on the new features",
+        "dueDate": "2024-03-25",
+        "Tags": ["Testing"],
+        "assignedMembers": [
+          {
+            "id": "user1",
+            "name": "John Doe"
+          },
+          {
+            "id": "user3",
+            "name": "Bob Johnson"
+          }
+        ]
+      }
+    ]
+  }
+    ]
+  }
