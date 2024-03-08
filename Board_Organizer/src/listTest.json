@@ -8,7 +8,16 @@
               "description": "Design wireframes for the new feature",
               "dueDate": "2024-03-10",
               "Tags": ["Design"],
-              "assignedMembers": ["user1", "user2"]
+              "assignedMembers": [
+                {
+                  "id": "user1",
+                  "name": "John Doe"
+                },
+                {
+                  "id": "user2",
+                  "name": "Jane Smith"
+                }
+              ]
             },
             {
               "id": "task2",
@@ -16,7 +25,101 @@
               "description": "Configure the server for the project",
               "dueDate": "2024-03-15",
               "Tags": ["Development"],
-              "assignedMembers": ["user3"]
+              "assignedMembers": [
+                {
+                  "id": "user1",
+                  "name": "Rose Doe"
+                },
+                {
+                  "id": "user2",
+                  "name": "claire Smith"
+                }
+              ]
+            },
+            {
+              "id": "task2",
+              "title": "Set Up Server",
+              "description": "Configure the server for the project",
+              "dueDate": "2024-03-15",
+              "Tags": ["Development"],
+              "assignedMembers": [
+                {
+                  "id": "user1",
+                  "name": "Rose Doe"
+                },
+                {
+                  "id": "user2",
+                  "name": "claire Smith"
+                }
+              ]
+            },
+            {
+              "id": "task2",
+              "title": "Set Up Server",
+              "description": "Configure the server for the project",
+              "dueDate": "2024-03-15",
+              "Tags": ["Development"],
+              "assignedMembers": [
+                {
+                  "id": "user1",
+                  "name": "Rose Doe"
+                },
+                {
+                  "id": "user2",
+                  "name": "claire Smith"
+                }
+              ]
+            },
+            {
+              "id": "task2",
+              "title": "Set Up Server",
+              "description": "Configure the server for the project",
+              "dueDate": "2024-03-15",
+              "Tags": ["Development"],
+              "assignedMembers": [
+                {
+                  "id": "user1",
+                  "name": "Rose Doe"
+                },
+                {
+                  "id": "user2",
+                  "name": "claire Smith"
+                }
+              ]
+            },
+            {
+              "id": "task2",
+              "title": "Set Up Server",
+              "description": "Configure the server for the project",
+              "dueDate": "2024-03-15",
+              "Tags": ["Development"],
+              "assignedMembers": [
+                {
+                  "id": "user1",
+                  "name": "Rose Doe"
+                },
+                {
+                  "id": "user2",
+                  "name": "claire Smith"
+                }
+              ]
+            },
+            {
+              "id": "task2",
+              "title": "Set Up Server",
+              "description": "Configure the server for the project",
+              "dueDate": "2024-03-15",
+              "Tags": ["Development"],
+              "assignedMembers": [
+                {
+                  "id": "user1",
+                  "name": "Rose Doe"
+                },
+                {
+                  "id": "user2",
+                  "name": "claire Smith"
+                }
+              ]
             }
           ]
 }

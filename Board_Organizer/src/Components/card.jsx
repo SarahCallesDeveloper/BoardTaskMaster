@@ -57,20 +57,19 @@ export function Card({ card, onEdit }) {
 
   return (
     <div className="container">
-    <div className="row">
-      <div className="col">
+    
         <div className="card" style={{ maxWidth: '320px', position: 'relative' }}>
           {/* Overlay element */}
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to bottom, rgba(0, 102, 255, 0.2), rgba(0, 255, 128, 0.2))', pointerEvents: 'none' }}></div>
-
-          <div className="card-body" style={{ padding: 10 }}>
+  
+          <div className="card-body" style={{ paddingTop: collapsed ? '0' : '0', paddingBottom: collapsed ? '0' : '0', paddingLeft: '0', paddingRight: '0' }}>
             <div className="d-flex justify-content-between align-items-center">
               <h5 className="card-title mb-0">{title}</h5>
-              <button className="btn text-primary" type="button" onClick={handleToggleCollapse}>
+              <button className="btn text-primary" type="button" onClick={handleToggleCollapse} style={{padding:"0"}}>
                 ?<i className={`bi bi-${collapsed ? 'plus' : 'dash'}-circle`}></i>
               </button>
             </div>
-            <p className='date'>{dueDate}</p>
+            <p style={{paddingLeft:"3px"}} className='date'>{dueDate}</p>
             <div className={`collapse ${collapsed ? '' : 'show'}`}>
               <p className='description'>{description}</p>
               <p>
@@ -78,7 +77,7 @@ export function Card({ card, onEdit }) {
                   <span
                     key={index}
                     className={`member member${index % 2 + 1}`}
-                    style={{ padding: '5px' }}
+                    style={{ padding: '3px' }}
                   >
                     {member.name}
                   </span>
@@ -89,7 +88,7 @@ export function Card({ card, onEdit }) {
                   <span
                     key={index}
                     className={`tag tag${index % 2 + 1}`}
-                    style={{ padding: '5px' }}
+                    style={{ padding: '0' }}
                   >
                     {tag}
                   </span>
@@ -99,8 +98,7 @@ export function Card({ card, onEdit }) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+  
       {isEditing && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document" style={{ maxWidth: '600px', maxHeight: "400px" }}>
