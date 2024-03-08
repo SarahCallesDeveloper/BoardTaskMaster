@@ -43,7 +43,7 @@ function App() {
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <>
     <List list={jsonList}/>
-  </React.StrictMode>,
+  </>,
 );
