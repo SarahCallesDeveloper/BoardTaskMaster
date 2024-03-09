@@ -4,11 +4,18 @@ import { Card } from './card'; // Assuming you have a Card component
 import '../Styling/CssList.css';
 import "../Styling/CssScrollbar.css"
 
-export function List({ list }) {
+export function List({ list,onRemove }) {
   const { id, name, cards } = list;
   const [updatedCards, setUpdatedCards] = useState(cards);
 
   // Function to handle editing of a card
+  
+  const handleRemove = () => {
+    const confirmation = window.confirm("Are you sure you want to remove this list?");
+    if (confirmation) {
+      onRemove(list.id);
+    }
+  };
   const handleEdit = (id, editedTitle, editedDescription, editedDueDate, editedTags, editedAssignedMembers) => {
     // Find the card with the given id
     const updatedCardIndex = updatedCards.findIndex(card => card.id === id);
@@ -45,6 +52,7 @@ export function List({ list }) {
           {(provided, snapshot) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <div className="list" id={id}>
+                 <button onClick={handleRemove}>X</button>
                 <h2 className="mt-2 mb-3" style={{ textAlign: 'center', fontSize: '1.2rem', paddingTop: '10px', margin: '0' }}>{name}</h2>
                 <div className="row row-cols-1 row-cols-md-1 g-1">
                   {updatedCards.map((card, index) => (
