@@ -46,7 +46,7 @@ export function List({ list,onRemove }) {
   };
 
   return (
-    <div className="container px-0 custom-container" style={{ maxWidth: '330px', height: '90vh', overflowY: 'auto', overflowX: 'hidden', background: 'linear-gradient(45deg, #FF6B6B, #FFE66D)', borderRadius: '15px' }}>
+    <div className="container px-0 custom-container" style={{ maxWidth: '330px', height: '86vh', overflowY: 'auto', overflowX: 'hidden', background: 'linear-gradient(45deg, #FF6B6B, #FFE66D)', borderRadius: '15px' }}>
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (

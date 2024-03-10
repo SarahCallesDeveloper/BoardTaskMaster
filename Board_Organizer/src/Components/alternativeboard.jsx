@@ -53,7 +53,7 @@ export function Board({ board, onRemove }) {
   };
 
   return (
-    <div>
+    <div style={{background:"pink"}}>
     <nav className="navbar navbar-dark bg-dark">
       <div className="container-fluid">
         <span className="navbar-brand">{name}</span>
