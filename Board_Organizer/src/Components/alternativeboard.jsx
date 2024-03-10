@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { List } from './list'; // Assuming you have a List component
-import '../Styling/CssList.css';
+
 import "../Styling/CssScrollbar.css"
 
 export function Board({ board, onRemove }) {
@@ -50,40 +50,50 @@ export function Board({ board, onRemove }) {
 
   return (
     <div>
-      <nav className="navbar navbar-dark bg-dark">
-        <div className="container-fluid">
-          <span className="navbar-brand">{name}</span>
-          <button className="btn btn-outline-light me-2" onClick={handleAddList}>Add List</button>
-        </div>
-      </nav>
-      <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden' }}>
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="droppable" direction="horizontal">
-            {(provided, snapshot) => (
-              <div ref={provided.innerRef} {...provided.droppableProps} style={{ display: 'flex' }}>
-                {updatedLists.map((list, index) => (
-                  <Draggable key={list.id} draggableId={list.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{
-                          ...provided.draggableProps.style,
-                          marginRight: '8px' // Adjust spacing between draggable items as needed
-                        }}
-                      >
-                        <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+    <nav className="navbar navbar-dark bg-dark">
+      <div className="container-fluid">
+        <span className="navbar-brand">{name}</span>
+        <button className="btn btn-outline-light me-2" onClick={handleAddList}>Add List</button>
       </div>
+    </nav>
+    <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="droppable" direction="horizontal">
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              style={{
+                display: 'flex',
+                width: 'max-content' // Set the width to max-content to allow the container to expand based on its content
+              }}
+            >
+              {updatedLists.map((list, index) => (
+                <Draggable key={list.id} draggableId={list.id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={{
+                        ...provided.draggableProps.style,
+                        width: '200px', // Set a fixed width for each list container
+                        marginRight: '8px' // Adjust spacing between draggable items as needed
+                      }}
+                    >
+                      <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
+  </div>
+  
+  
   );
 }
