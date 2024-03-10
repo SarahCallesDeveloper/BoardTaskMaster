@@ -60,7 +60,7 @@ export function List({ list,onRemove }) {
                       {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                           <div className="col">
-                            <Card card={card} onEdit={handleEdit}  />
+                            <Card card={card} onEdit={handleEdit} style={{ borderRadius: '15px', boxShadow: snapshot.isDragging ? '0 4px 8px 0 rgba(0, 0, 0, 0.2)' : 'none' }} />
                           </div>
                         </div>
                       )}

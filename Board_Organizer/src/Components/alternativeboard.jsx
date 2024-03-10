@@ -56,29 +56,28 @@ export function Board({ board, onRemove }) {
           <button className="btn btn-outline-light me-2" onClick={handleAddList}>Add List</button>
         </div>
       </nav>
-      <div className="container px-0 custom-container" style={{ maxWidth: '330px', height: '90vh', overflowY: 'auto', overflowX: 'hidden', background: 'linear-gradient(45deg, #FF6B6B, #FFE66D)', borderRadius: '15px' }}>
-       
+      <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden' }}>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="droppable">
+          <Droppable droppableId="droppable" direction="horizontal">
             {(provided, snapshot) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
-                <div className="board" id={id}>
-                   <button onClick={handleRemove}>X</button>
-                  <h2 className="mt-2 mb-3" style={{ textAlign: 'center', fontSize: '1.2rem', paddingTop: '10px', margin: '0' }}>{name}</h2>
-                  <div className="row row-cols-1 row-cols-md-1 g-1">
-                    {updatedLists.map((list, index) => (
-                      <Draggable key={list.id} draggableId={list.id} index={index}>
-                        {(provided, snapshot) => (
-                          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                            <div className="col">
-                              <List list={list} onEdit={handleEdit} />
-                            </div>
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                  </div>
-                </div>
+              <div ref={provided.innerRef} {...provided.droppableProps} style={{ display: 'flex' }}>
+                {updatedLists.map((list, index) => (
+                  <Draggable key={list.id} draggableId={list.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={{
+                          ...provided.draggableProps.style,
+                          marginRight: '8px' // Adjust spacing between draggable items as needed
+                        }}
+                      >
+                        <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
                 {provided.placeholder}
               </div>
             )}
