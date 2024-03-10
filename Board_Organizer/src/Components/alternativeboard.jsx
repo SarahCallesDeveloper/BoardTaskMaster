@@ -1,48 +1,46 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Card } from './card'; // Assuming you have a Card component
+import { List } from './list'; // Assuming you have a List component
 import '../Styling/CssList.css';
 import "../Styling/CssScrollbar.css"
+import "../Styling/CssBoard.css"
 
-export function List({ list,onRemove }) {
-  const { id, name, cards } = list;
-  const [updatedCards, setUpdatedCards] = useState(cards);
-  console.log("id: ", id)
-  // Function to handle editing of a card
-  
+export function Board({ board, onRemove }) {
+  const { id, name, lists } = board;
+  const [updatedLists, setUpdatedLists] = useState(lists);
+
+  // Function to handle editing of a list
   const handleRemove = () => {
-    const confirmation = window.confirm("Are you sure you want to remove this list?");
+    const confirmation = window.confirm("Are you sure you want to remove this board?");
     if (confirmation) {
-      onRemove(list.id);
-    }
-  };
-  const handleEdit = (id, editedTitle, editedDescription, editedDueDate, editedTags, editedAssignedMembers) => {
-    // Find the card with the given id
-    const updatedCardIndex = updatedCards.findIndex(card => card.id === id);
-    if (updatedCardIndex !== -1) {
-      const updatedCard = {
-        ...updatedCards[updatedCardIndex],
-        title: editedTitle,
-        description: editedDescription,
-        dueDate: editedDueDate,
-        Tags: editedTags,
-        assignedMembers: editedAssignedMembers
-      };
-      // Update the card in the cards array
-      const newCards = [...updatedCards];
-      newCards[updatedCardIndex] = updatedCard;
-      // Update the state with the updated cards
-      setUpdatedCards(newCards);
+      onRemove(board.id);
     }
   };
 
-  // Function to handle reordering of cards
+  const handleEdit = (id, editedListName, editedListCards) => {
+    // Find the list with the given id
+    const updatedListIndex = updatedLists.findIndex(list => list.id === id);
+    if (updatedListIndex !== -1) {
+      const updatedList = {
+        ...updatedLists[updatedListIndex],
+        name: editedListName,
+        cards: editedListCards
+      };
+      // Update the list in the lists array
+      const newLists = [...updatedLists];
+      newLists[updatedListIndex] = updatedList;
+      // Update the state with the updated lists
+      setUpdatedLists(newLists);
+    }
+  };
+
+  // Function to handle reordering of lists
   const handleDragEnd = (result) => {
-    if (!result.destination) return; // dropped outside the list
-    const items = Array.from(updatedCards);
+    if (!result.destination) return; // dropped outside the board
+    const items = Array.from(updatedLists);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    setUpdatedCards(items);
+    setUpdatedLists(items);
   };
 
   return (
@@ -51,16 +49,16 @@ export function List({ list,onRemove }) {
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <div className="list" id={id}>
+              <div className="board" id={id}>
                  <button onClick={handleRemove}>X</button>
                 <h2 className="mt-2 mb-3" style={{ textAlign: 'center', fontSize: '1.2rem', paddingTop: '10px', margin: '0' }}>{name}</h2>
                 <div className="row row-cols-1 row-cols-md-1 g-1">
-                  {updatedCards.map((card, index) => (
-                    <Draggable key={card.id} draggableId={card.id} index={index}>
+                  {updatedLists.map((list, index) => (
+                    <Draggable key={list.id} draggableId={list.id} index={index}>
                       {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                           <div className="col">
-                            <Card card={card} onEdit={handleEdit}  />
+                            <List list={list} onEdit={handleEdit} />
                           </div>
                         </div>
                       )}
@@ -76,4 +74,3 @@ export function List({ list,onRemove }) {
     </div>
   );
 }
-

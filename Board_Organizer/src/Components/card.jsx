@@ -12,7 +12,7 @@ export function Card({ card, onEdit }) {
   const [newTag, setNewTag] = useState('');
   const [isEditingTags, setIsEditingTags] = useState(false);
 
-
+  console.log("Card idCard: ", id)
   const [collapsed, setCollapsed] = useState(true);
   
   const handleToggleCollapse = () => {

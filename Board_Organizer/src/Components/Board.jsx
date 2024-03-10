@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Droppable, DragDropContext } from 'react-beautiful-dnd';
+import { Droppable, DragDropContext,Draggable } from 'react-beautiful-dnd';
 import { List } from "./list";
 
 export function Board({ boardData }) {
@@ -20,44 +20,19 @@ export function Board({ boardData }) {
   };
 
   const handleDragEnd = (result) => {
+    if (!result.destination) return; // dropped outside the droppable area
+  
     const { source, destination } = result;
-    // Check if the drag ended outside the droppable area or if the position hasn't changed
-    if (!destination || (source.droppableId === destination.droppableId && source.index === destination.index)) {
-      return;
-    }
-
-    // Find the source and destination lists
-    const sourceList = lists.find(list => list.id === source.droppableId);
-    const destinationList = lists.find(list => list.id === destination.droppableId);
-
-    // Find the dragged card
-    const draggedCard = sourceList.cards[source.index];
-
-    // Remove the card from the source list
-    const updatedSourceCards = [...sourceList.cards];
-    updatedSourceCards.splice(source.index, 1);
-
-    // Add the card to the destination list
-    const updatedDestinationCards = [...destinationList.cards];
-    updatedDestinationCards.splice(destination.index, 0, draggedCard);
-
-    // Update the lists with the new card positions
-    const updatedLists = lists.map(list => {
-      if (list.id === source.droppableId) {
-        return { ...list, cards: updatedSourceCards };
-      }
-      if (list.id === destination.droppableId) {
-        return { ...list, cards: updatedDestinationCards };
-      }
-      return list;
-    });
-
-    // Update the state with the new lists
+  
+    const updatedLists = Array.from(lists);
+    const [draggedList] = updatedLists.splice(source.index, 1);
+    updatedLists.splice(destination.index, 0, draggedList);
+  
     setLists(updatedLists);
   };
-
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
+    <>
+
       <div>
         <nav className="navbar navbar-dark bg-dark">
           <div className="container-fluid">
@@ -65,21 +40,33 @@ export function Board({ boardData }) {
             <button className="btn btn-outline-light me-2" onClick={handleAddList}>Add List</button>
           </div>
         </nav>
+    
         <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden' }}>
-          <div className="board row row-cols-auto flex-nowrap" style={{ marginRight: '-5px' }}>
+        <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+        <div ref={provided.innerRef} {...provided.droppableProps}>
+          <div className='board' id={id}></div>
+          <div className=" row row-cols-auto flex-nowrap" style={{ marginRight: '-5px' }}>
+        
             {lists.map((list, index) => (
-              <Droppable droppableId={list.id} key={list.id}>
+             <Draggable key={list.id} draggableId={list.id} index={index}>
                 {(provided) => (
-                  <div ref={provided.innerRef} {...provided.droppableProps} className="col-3 px-1">
+                  <div ref={provided.innerRef} {...provided.droppableProps}{...provided.dragHandleProps} className="col-3 px-1">
                     <List list={list} onRemove={() => handleRemoveList(list.id)} />
-                    {provided.placeholder}
+                   
                   </div>
                 )}
-              </Droppable>
+            </Draggable>
             ))}
           </div>
+          </div> 
+          )}
+          </Droppable>
+        </DragDropContext>
         </div>
       </div>
-    </DragDropContext>
+
+    </>
   );
 }

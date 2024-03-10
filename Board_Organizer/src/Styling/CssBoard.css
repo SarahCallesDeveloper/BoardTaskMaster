@@ -1,0 +1,48 @@
+.custom-container {
+    max-width: calc(100% - 20px); /* Adjust the maximum width as needed */
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .board {
+    display: inline-block;
+    margin-right: 10px; /* Adjust the margin between lists as needed */
+    vertical-align: top;
+  }
+  
+  .row {
+    white-space: nowrap;
+  }
+  
+  .col {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px; /* Adjust the margin between cards as needed */
+  }
+  
+  .list {
+    max-width: 300px; /* Adjust the maximum width of each list as needed */
+    height: 100%; /* Ensure each list takes full height of the container */
+    overflow-y: auto;
+    background-color: #ffffff; /* Change background color as needed */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px; /* Adjust the margin between lists as needed */
+  }
+  
+  .list h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .card {
+    background-color: #f2f2f2; /* Change background color as needed */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px; /* Adjust the margin between cards as needed */
+  }
+  
+  .card h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
