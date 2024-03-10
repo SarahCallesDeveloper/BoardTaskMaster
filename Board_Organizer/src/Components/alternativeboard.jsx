@@ -24,6 +24,10 @@ export function Board({ board, onRemove }) {
     };
     setUpdatedLists(prevLists => [...prevLists, newList]);
   };
+  const handleRemoveList = (id) => {
+    setUpdatedLists(prevLists => prevLists.filter(list => list.id !== id));
+  };
+
 
   const handleEdit = (id, editedListName, editedListCards) => {
     const updatedListsCopy = updatedLists.map(list => {
