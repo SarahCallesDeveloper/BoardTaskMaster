@@ -52,22 +52,14 @@ export function Board({ board, onRemove }) {
     setUpdatedLists(items);
   };
 
-  const handleBoardRemove = () => {
-    const confirmation = window.confirm("Are you sure you want to remove this board?");
-    if (confirmation) {
-      onRemove(board.id);
-    }
-  };
-
   return (
-    <div>
-      <nav className="navbar navbar-dark bg-dark">
-        <div className="container-fluid">
-          <span className="navbar-brand">{name}</span>
-          <button className="btn btn-outline-light me-2" onClick={handleAddList}>Add List</button>
-          <button className="btn btn-outline-danger" onClick={handleBoardRemove}>Remove Board</button>
-        </div>
-      </nav>
+    <div style={{background:"pink"}}>
+    <nav className="navbar navbar-dark bg-dark">
+      <div className="container-fluid">
+        <span className="navbar-brand">{name}</span>
+        <button className="btn btn-outline-light me-2" onClick={handleAddList}>Add List</button>
+      </div>
+    </nav>
     <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="droppable" direction="horizontal">
