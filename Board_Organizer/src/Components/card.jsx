@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../Styling/CssCard.css';
 
-export function Card({ card, onEdit }) {
+export function Card({ card, onEdit,onRemove }) {
   const { id, title, description, dueDate, Tags, assignedMembers } = card;
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -19,7 +19,12 @@ export function Card({ card, onEdit }) {
       setCollapsed(!collapsed);
     };
   
-  
+  const handleRemove = () => {
+    const confirmation = window.confirm("Are you sure you want to remove this Card?");
+    if (confirmation) {
+      onRemove(id);
+    }
+  };
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -58,12 +63,13 @@ export function Card({ card, onEdit }) {
   return (
     <div className="container">
     <div className="card" style={{ maxWidth: '320px', position: 'relative' }}>
+      
       {/* Overlay element */}
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to bottom, rgba(0, 102, 255, 0.2), rgba(0, 255, 128, 0.2))', pointerEvents: 'none' }}></div>
 
       <div className="card-body" style={{ paddingTop: collapsed ? '0' : '0', paddingBottom: collapsed ? '0' : '0', paddingLeft: '0', paddingRight: '0' }}>
         <div className="d-flex justify-content-between align-items-center">
-          <h5 className="card-title mb-0">{title}</h5>
+          <h6 className="card-title mb-0">{title}</h6>
           <button className="btn text-primary" type="button" onClick={handleToggleCollapse} style={{ padding: "0" }}>
             ?<i className={`bi bi-${collapsed ? 'plus' : 'dash'}-circle`}></i>
           </button>
@@ -93,8 +99,10 @@ export function Card({ card, onEdit }) {
               </span>
             ))}
           </p>
-          <button className="btn btn-primary btn-sm" onClick={handleEdit}>Edit</button>
-        </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  <button className="btn btn-primary btn-sm" onClick={handleEdit}>Edit</button>
+  <button className="btn btn-danger btn-sm" onClick={handleRemove}>X</button>
+</div></div>
       </div>
     </div>
   
