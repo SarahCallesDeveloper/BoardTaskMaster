@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import '../Styling/CssCard.css';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export function Card({ card, onEdit,onRemove }) {
+export function Card({ card, onEdit,onRemove,index }) {
+ 
   const { id, title, description, dueDate, Tags, assignedMembers } = card;
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -12,7 +14,7 @@ export function Card({ card, onEdit,onRemove }) {
   const [newTag, setNewTag] = useState('');
   const [isEditingTags, setIsEditingTags] = useState(false);
 
-  console.log("Card idCard: ", id)
+  console.log("Card index: ", index)
   const [collapsed, setCollapsed] = useState(true);
   
   const handleToggleCollapse = () => {
@@ -61,7 +63,11 @@ export function Card({ card, onEdit,onRemove }) {
   };
 
   return (
+    
     <div className="container">
+       <Draggable key={id} draggableId={id} index={id}>
+                      {(provided, snapshot) => (
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
     <div className="card" style={{ maxWidth: '320px', position: 'relative' }}>
       
       {/* Overlay element */}
@@ -224,6 +230,10 @@ export function Card({ card, onEdit,onRemove }) {
           </div>
         </div>
       )}
+      
+      </div>
+                      )}
+                    </Draggable>
     </div>
   );
 }
