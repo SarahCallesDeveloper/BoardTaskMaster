@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { List } from './list'; // Assuming you have a List component
 
 import "../Styling/CssScrollbar.css"
@@ -8,7 +7,6 @@ export function Board({ board, onRemove }) {
   const { id, name, lists } = board;
   const [updatedLists, setUpdatedLists] = useState(lists);
 
-  // Function to handle editing of a list
   const handleRemove = () => {
     const confirmation = window.confirm("Are you sure you want to remove this board?");
     if (confirmation) {
@@ -24,6 +22,7 @@ export function Board({ board, onRemove }) {
     };
     setUpdatedLists(prevLists => [...prevLists, newList]);
   };
+
   const handleRemoveList = (id) => {
     setUpdatedLists(prevLists => prevLists.filter(list => list.id !== id));
   };
@@ -43,23 +42,6 @@ export function Board({ board, onRemove }) {
     setUpdatedLists(updatedListsCopy);
   };
 
-  // Function to handle reordering of lists
-  /*const handleDragEnd = (result) => {
-    if (!result.destination) return; // dropped outside the board
-    const items = Array.from(updatedLists);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setUpdatedLists(items);
-  };*/
-
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
-    const items = Array.from(updatedLists);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setUpdatedLists(items);
-  };
-
   return (
     <div style={{background:"pink"}}>
       <nav className="navbar navbar-dark bg-dark">
@@ -70,36 +52,14 @@ export function Board({ board, onRemove }) {
         </div>
       </nav>
       <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
-       
-      <DragDropContext onDragEnd={handleDragEnd}>
-    <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
- 
-       
-            <div
-              style={{
-                display: 'flex',
-                width: 'max-content' // Set the width to max-content to allow the container to expand based on its content
-              }}
-            >
-              {updatedLists.map((list, index) => (
-                
-                    <div
-                     
-                      style={{
-                        width: '300px', // Set a fixed width for each list container
-                        marginRight: '8px' // Adjust spacing between draggable items as needed
-                      }}
-                    >
-                      <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
-                    </div>
-              
-              ))}
+        <div style={{ display: 'flex', width: 'max-content' }}>
+          {updatedLists.map((list) => (
+            <div style={{ width: '300px', marginRight: '8px' }} key={list.id}>
+              <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
             </div>
+          ))}
+        </div>
+      </div>
     </div>
-    </DragDropContext>
-    </div>
-  </div>
-  
-  
   );
 }
