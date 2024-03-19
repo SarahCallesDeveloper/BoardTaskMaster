@@ -65,9 +65,7 @@ export function Card({ card, onEdit,onRemove,index }) {
   return (
     
     <div className="container">
-       <Draggable key={id} draggableId={id} index={id}>
-                      {(provided, snapshot) => (
-                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+     
     <div className="card" style={{ maxWidth: '320px', position: 'relative' }}>
       
       {/* Overlay element */}
@@ -231,9 +229,6 @@ export function Card({ card, onEdit,onRemove,index }) {
         </div>
       )}
       
-      </div>
-                      )}
-                    </Draggable>
     </div>
   );
 }

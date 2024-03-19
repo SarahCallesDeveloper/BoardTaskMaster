@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { List } from './list';
-import Alternative from "./Alternative/alternativeBoard2.jsx"
+import { List } from './list'; // Assuming you have a List component
 
+import "../Styling/CssScrollbar.css"
 
 export function Board({ board, onRemove }) {
   const { id, name, lists } = board;
   const [updatedLists, setUpdatedLists] = useState(lists);
 
+  // Function to handle editing of a list
   const handleRemove = () => {
     const confirmation = window.confirm("Are you sure you want to remove this board?");
     if (confirmation) {
@@ -23,10 +24,10 @@ export function Board({ board, onRemove }) {
     };
     setUpdatedLists(prevLists => [...prevLists, newList]);
   };
-
   const handleRemoveList = (id) => {
     setUpdatedLists(prevLists => prevLists.filter(list => list.id !== id));
   };
+
 
   const handleEdit = (id, editedListName, editedListCards) => {
     const updatedListsCopy = updatedLists.map(list => {
@@ -42,8 +43,9 @@ export function Board({ board, onRemove }) {
     setUpdatedLists(updatedListsCopy);
   };
 
+  // Function to handle reordering of lists
   const handleDragEnd = (result) => {
-    if (!result.destination) return;
+    if (!result.destination) return; // dropped outside the board
     const items = Array.from(updatedLists);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
@@ -51,7 +53,7 @@ export function Board({ board, onRemove }) {
   };
 
   return (
-    <div>
+    <div style={{background:"pink"}}>
       <nav className="navbar navbar-dark bg-dark">
         <div className="container-fluid">
           <span className="navbar-brand">{name}</span>
@@ -60,48 +62,47 @@ export function Board({ board, onRemove }) {
         </div>
       </nav>
       <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="droppable" direction="horizontal">
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                style={{
-                  display: 'flex',
-                  width: 'max-content'
-                }}
-              >
-                {updatedLists.map((list, index) => (
-                  <Draggable key={list.id} draggableId={list.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{
-                          ...provided.draggableProps.style,
-                          width: '300px',
-                          marginRight: '8px'
-                        }}
-                      >
-                        <List
-                          list={list}
-                          onEdit={handleEdit}
-                          onRemove={() => handleRemoveList(list.id)}
-                          setLists={setUpdatedLists} // Pass setLists to the List component
-                          lists={updatedLists} // Pass lists to the List component
-                          listIndex={index} // Pass list index to the List component
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </div>
+       
+
+    <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="droppable" direction="horizontal">
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              style={{
+                display: 'flex',
+                width: 'max-content' // Set the width to max-content to allow the container to expand based on its content
+              }}
+            >
+              {updatedLists.map((list, index) => (
+                <Draggable key={list.id} draggableId={list.id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={{
+                        ...provided.draggableProps.style,
+                        width: '300px', // Set a fixed width for each list container
+                        marginRight: '8px' // Adjust spacing between draggable items as needed
+                      }}
+                    >
+                      <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
+    </div>
+  </div>
+  
+  
   );
 }
