@@ -62,16 +62,21 @@ export function List({ list, onRemove }) {
       <h2 className="mt-2 mb-3" style={{ textAlign: 'center', fontSize: '1.2rem', paddingTop: '10px', margin: '0' }}>{name}</h2>
       <button onClick={handleAddCard} style={{ margin: '0 10px 10px 10px' }}>Add Card</button>
       <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="droppable">
+        <Droppable droppableId={`droppable-${id}`}>
           {(provided, snapshot) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <div className="list" id={id}>
                 <div className="row row-cols-1 row-cols-md-1 g-1">
                   {updatedCards.map((card, index) => (
-                   
+                    <Draggable key={card.id} draggableId={`draggable-${card.id}`} index={index}>
+                      {(provided, snapshot) => (
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                           <div className="col">
                             <Card card={card} onEdit={handleEdit} index={index} onRemove={() => handleRemoveCard(card.id)} style={{ borderRadius: '15px', boxShadow: snapshot.isDragging ? '0 4px 8px 0 rgba(0, 0, 0, 0.2)' : 'none' }} />
                           </div>
+                        </div>
+                      )}
+                    </Draggable>
                   ))}
                 </div>
               </div>
