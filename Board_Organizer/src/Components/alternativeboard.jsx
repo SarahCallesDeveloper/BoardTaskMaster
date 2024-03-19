@@ -65,40 +65,28 @@ export function Board({ board, onRemove }) {
        
 
     <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="droppable" direction="horizontal">
-          {(provided, snapshot) => (
+ 
+       
             <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
               style={{
                 display: 'flex',
                 width: 'max-content' // Set the width to max-content to allow the container to expand based on its content
               }}
             >
               {updatedLists.map((list, index) => (
-                <Draggable key={list.id} draggableId={list.id} index={index}>
-                  {(provided, snapshot) => (
+                
                     <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
+                     
                       style={{
-                        ...provided.draggableProps.style,
                         width: '300px', // Set a fixed width for each list container
                         marginRight: '8px' // Adjust spacing between draggable items as needed
                       }}
                     >
                       <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
                     </div>
-                  )}
-                </Draggable>
+              
               ))}
-              {provided.placeholder}
             </div>
-          )}
-        </Droppable>
-      </DragDropContext>
     </div>
     </div>
   </div>
