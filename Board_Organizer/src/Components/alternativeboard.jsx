@@ -81,7 +81,7 @@ export function Board({ board, onRemove }) {
                       {...provided.dragHandleProps}
                       style={{
                         ...provided.draggableProps.style,
-                        width: '200px', // Set a fixed width for each list container
+                        width: '300px', // Set a fixed width for each list container
                         marginRight: '8px' // Adjust spacing between draggable items as needed
                       }}
                     >
