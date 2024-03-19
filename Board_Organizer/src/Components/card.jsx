@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../Styling/CssCard.css';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export function Card({ card, onEdit,onRemove,index }) {
  
