@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { List } from './list';
+import Alternative from "./Alternative/alternativeBoard2.jsx"
+
 
 export function Board({ board, onRemove }) {
   const { id, name, lists } = board;
