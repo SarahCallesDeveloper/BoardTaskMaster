@@ -44,8 +44,16 @@ export function Board({ board, onRemove }) {
   };
 
   // Function to handle reordering of lists
-  const handleDragEnd = (result) => {
+  /*const handleDragEnd = (result) => {
     if (!result.destination) return; // dropped outside the board
+    const items = Array.from(updatedLists);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setUpdatedLists(items);
+  };*/
+
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
     const items = Array.from(updatedLists);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
@@ -63,7 +71,7 @@ export function Board({ board, onRemove }) {
       </nav>
       <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
        
-
+      <DragDropContext onDragEnd={handleDragEnd}>
     <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
  
        
@@ -88,6 +96,7 @@ export function Board({ board, onRemove }) {
               ))}
             </div>
     </div>
+    </DragDropContext>
     </div>
   </div>
   
