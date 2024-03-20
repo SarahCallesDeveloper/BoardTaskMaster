@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import { Card } from './card'; // Assuming you have a Card component
 import '../Styling/CssList.css';
 import "../Styling/CssScrollbar.css"
@@ -52,16 +53,21 @@ export function List({ list, onRemove }) {
       <button onClick={handleRemove}>X</button>
       <h2 className="mt-2 mb-3" style={{ textAlign: 'center', fontSize: '1.2rem', paddingTop: '10px', margin: '0' }}>{name}</h2>
       <button onClick={handleAddCard} style={{ margin: '0 10px 10px 10px' }}>Add Card</button>
-    
-      <div className="list" id={id}>
-        <div className="row row-cols-1 row-cols-md-1 g-1">
-          {updatedCards.map((card, index) => (
-            <div className="col" key={card.id}>
-              <Card card={card} onEdit={handleEdit} index={index} onRemove={() => handleRemoveCard(card.id)} style={{ borderRadius: '15px' }} />
+
+      <Droppable droppableId={id} type="CARD">
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps} className="list" id={id}>
+            <div className="row row-cols-1 row-cols-md-1 g-1">
+              {cards.map((card, index) => (
+                <div className="col" key={card.id}>
+                  <Card card={card} onEdit={handleEdit} index={index} onRemove={() => handleRemoveCard(card.id)} style={{ borderRadius: '15px' }} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 }

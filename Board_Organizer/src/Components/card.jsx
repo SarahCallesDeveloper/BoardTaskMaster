@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../Styling/CssCard.css';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {  Draggable } from 'react-beautiful-dnd';
 
 export function Card({ card, onEdit,onRemove,index }) {
  
@@ -63,7 +63,11 @@ export function Card({ card, onEdit,onRemove,index }) {
   };
 
   return (
-    
+    <Draggable draggableId={id} index={index}>
+  {(provided) => (
+    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+      {/* Your existing Card component JSX goes here */}
+     
     <div className="container">
      
     <div className="card" style={{ maxWidth: '320px', position: 'relative' }}>
@@ -230,5 +234,8 @@ export function Card({ card, onEdit,onRemove,index }) {
       )}
       
     </div>
+    </div>
+  )}
+</Draggable>
   );
 }
