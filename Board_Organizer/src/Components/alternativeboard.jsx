@@ -54,7 +54,7 @@ export function Board({ board, onRemove }) {
       <div className="container-fluid py-3" style={{ overflowX: 'auto', overflowY: 'hidden', maxWidth: '100vw' }}>
         <div style={{ display: 'flex', width: 'max-content' }}>
           {updatedLists.map((list) => (
-            <div style={{ width: '300px', marginRight: '8px' }} key={list.id}>
+            <div style={{ width: '400px',}} key={list.id}>
               <List list={list} onEdit={handleEdit} onRemove={() => handleRemoveList(list.id)} />
             </div>
           ))}
