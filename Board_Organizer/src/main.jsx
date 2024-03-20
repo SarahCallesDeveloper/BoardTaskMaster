@@ -10,11 +10,12 @@ import Alternative from "./Components/Alternative/alternativeBoard2.jsx"
 import YourComponent from "./Components/Alternative/YourComponent.jsx"
 //import {Card} from "./Components/AlternativeCard"
 import BoardHandler from './Components/BoarddHandler.jsx';
-
+import Alternative2 from "./FunctionalButNotSmooth/BoarddHandler.jsx"
 
 //<Board boardData={jsonBoard}></Board>
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
+  <Alternative2/>
 <BoardHandler/>
   {console.log("jsonBoard: ",jsonBoard)}
   </>,

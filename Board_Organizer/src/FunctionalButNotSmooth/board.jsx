@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { List } from './list'; // Assuming you have a List component
 
-import "../Styling/CssScrollbar.css"
-
+import "../Styling/CssBoard.css"
 export function Board({ board, onRemove, handleDragEnd }) {
   const { id, name, lists } = board;
   const [updatedLists, setUpdatedLists] = useState(lists);
