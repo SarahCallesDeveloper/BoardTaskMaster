@@ -15,4 +15,4 @@ const Board = ({ lists, handleDragEnd }) => {
   );
 };
 
-export default Board;
+export default Board; 
