@@ -63,7 +63,7 @@ export function Card({ card, onEdit,onRemove,index }) {
   };
 
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable key={card.id} draggableId={id}  index={index}>
   {(provided) => (
     <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
       {/* Your existing Card component JSX goes here */}

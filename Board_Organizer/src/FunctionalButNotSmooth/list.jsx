@@ -56,14 +56,17 @@ export function List({ list, onRemove }) {
 
       <Droppable droppableId={id} type="CARD">
         {(provided, snapshot) => (
-          <div ref={provided.innerRef} {...provided.droppableProps}  id={id}>
+          <div ref={provided.innerRef} {...provided.droppableProps}  >
+            <div id={id}>
             <div className="row row-cols-1 row-cols-md-1 g-1">
               {updatedCards.map((card, index) => (
-                <div className="col" key={card.id}>
-                  <Card card={card} onEdit={handleEdit} index={index} onRemove={() => handleRemoveCard(card.id)} style={{ borderRadius: '15px', boxShadow: snapshot.isDragging ? '0 4px 8px 0 rgba(0, 0, 0, 0.2)' : 'none' }} />
-                </div>
+                
+                  <Card card={card} onEdit={handleEdit} index={index} onRemove={() => handleRemoveCard(card.id)} />
+             
               ))}
             </div>
+            
+                </div>
             {provided.placeholder}
           </div>
         )}
